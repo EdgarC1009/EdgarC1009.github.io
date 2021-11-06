@@ -1,5 +1,5 @@
 ---
-title: "My personal website"
+title: "Yijia(Edgar) Chen"
 output: 
   html_document:
     toc: true
@@ -8,13 +8,13 @@ output:
 
 # Introduction
 
+I am Yijia(Edgar) Chen, a current second-year Biotechnology master student in GSAS of Columbia University. I have some research experience in plant physiology and edaphon. I also have working experience in pharmacy and biological consulting. My current interests are genetics and R programming. 
 
 
 <img src="files/red_cat.gif" style="width:75%">
 
-I can link to useful thiings like 
-[google](https://www.google.com/) and 
-[p8105](https://www.p8105.com/)
+Related personal links: 
+[linkedin](https://www.linkedin.com/in/yijia-edgar-chen-76b4a0198/)
 
 
 I can make an extra page on my site and link to that. Here's my [about](about.html) page.
