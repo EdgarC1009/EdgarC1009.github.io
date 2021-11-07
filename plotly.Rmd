@@ -1,0 +1,76 @@
+---
+title: "Plotly"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r}
+library(tidyverse)
+library(p8105.datasets)
+
+library(plotly)
+```
+
+Import the NYC Restaurant Inspections dataset and do data cleaning
+
+```{r}
+data(rest_inspec)
+
+rest_inspec_mod = 
+  rest_inspec %>% 
+  select(boro, street, cuisine_description, zipcode, score, grade) %>% 
+  filter(
+    boro == "MANHATTAN",
+    cuisine_description %in% c("Hawaiian", "American", "Brazilian", "English", "French", "German", "Irish", "Italian", "Mexican", "Turkish", "Russian", "Vietnamese/Cambodian/Malaysia", "Australian", "Chinese", "Indian", "Japanese", "Korean", "Latin", "Spanish", "Thai")
+  ) %>% 
+  distinct() %>% 
+  drop_na()
+
+```
+
+
+
+## make a scatterplot
+
+
+```{r}
+rest_inspec_scatt =
+  rest_inspec_mod %>% 
+  mutate(
+    text_label = str_c("Cuisine_type: ", cuisine_description, "\nGrade: ", grade)
+  ) %>% 
+  plot_ly(
+    x = ~zipcode, y = ~street, type = "scatter", mode = "markers", color = ~score, text = ~text_label, alpha = .5
+    )
+
+rest_inspec_scatt
+```
+
+## plotly boxplot
+
+```{r}
+rest_inspec_box = 
+rest_inspec_mod %>% 
+  mutate(
+    cuisine_description = fct_reorder(cuisine_description, score)
+  ) %>% 
+  plot_ly(y = ~score, color = ~cuisine_description, type = "box",
+          colors = "viridis")
+
+rest_inspec_box
+```
+
+## bar chart
+
+```{r}
+rest_inspec_bar = 
+  rest_inspec_mod %>% 
+  count(cuisine_description) %>% 
+  mutate(cuisine_description = fct_reorder(cuisine_description, n)) %>% 
+  plot_ly(x = ~cuisine_description, y = ~n, color = ~cuisine_description, type = "bar", colors = "viridis")
+
+rest_inspec_bar
+```
+
