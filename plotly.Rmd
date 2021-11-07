@@ -6,7 +6,7 @@ output:
     toc_float: true
 ---
 
-```{r}
+```{r message = FALSE}
 library(tidyverse)
 library(p8105.datasets)
 
@@ -20,10 +20,11 @@ data(rest_inspec)
 
 rest_inspec_mod = 
   rest_inspec %>% 
-  select(boro, street, cuisine_description, zipcode, score, grade) %>% 
+  select(dba, boro, street, cuisine_description, inspection_type, zipcode, score, grade) %>% 
   filter(
     boro == "MANHATTAN",
-    cuisine_description %in% c("Hawaiian", "American", "Brazilian", "English", "French", "German", "Irish", "Italian", "Mexican", "Turkish", "Russian", "Vietnamese/Cambodian/Malaysia", "Australian", "Chinese", "Indian", "Japanese", "Korean", "Latin", "Spanish", "Thai")
+    inspection_type == "Cycle Inspection / Initial Inspection",
+    cuisine_description %in% c("American", "French", "Irish", "Italian", "Mexican", "Turkish", "Chinese", "Indian", "Japanese", "Korean", "Latin", "Spanish", "Thai")
   ) %>% 
   distinct() %>% 
   drop_na()
